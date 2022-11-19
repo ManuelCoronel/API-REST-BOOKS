@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -27,4 +24,8 @@ public class Book {
 
     @Transient
     private String imagenUrl;
+
+    @ManyToOne
+    @JoinColumn()
+    private Category categoria;
 }
