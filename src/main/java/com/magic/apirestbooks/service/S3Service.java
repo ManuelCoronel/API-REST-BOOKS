@@ -2,13 +2,12 @@ package com.magic.apirestbooks.service;
 
 
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
 import com.magic.apirestbooks.model.vm.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
 
+@Service
 public class S3Service {
     private final static String BUCKET = "springbooks";
 
@@ -30,7 +30,7 @@ public class S3Service {
         objectMetadata.setContentType(multipartFile.getContentType());
 
         try {
-            PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET,key,multipartFile.getInputStream(),objectMetadata);
+            PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET,key,multipartFile.getInputStream(),objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
             s3Client.putObject(putObjectRequest);
             return key;
         }catch (IOException ex){
