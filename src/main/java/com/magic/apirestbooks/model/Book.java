@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 @Data
@@ -24,5 +25,6 @@ public class Book {
 
     private String imagenPath;
 
+    @Transient
     private String imagenUrl;
 }
