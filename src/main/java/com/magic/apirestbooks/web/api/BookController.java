@@ -30,7 +30,7 @@ public class BookController {
     }
 
     @PostMapping
-    ResponseEntity<Book> create(@RequestBody Book libro){
+    ResponseEntity<Book> guardarLibro(@RequestBody Book libro){
         try{
             return ResponseEntity.ok().body(bookService.guardarLibro(libro));
         } catch (Exception e){
