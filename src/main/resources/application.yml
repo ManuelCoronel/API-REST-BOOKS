@@ -9,6 +9,9 @@ cloud:
         secret-key: pToCHHOTmpI0whA3JyqAnnhyRHux5aiBhL54aIDQ
 loggin:
   level:
+    org:
+      hibernate:
+        SQL: debug
   com:
     amazonaws:
       internal:
@@ -16,4 +19,14 @@ loggin:
       util:
         EC2MetadataUtils: error
 
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost/db_book?usSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 

@@ -4,9 +4,11 @@ import com.magic.apirestbooks.model.Book;
 import com.magic.apirestbooks.repository.BookRepository;
 import com.magic.apirestbooks.service.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,4 +32,18 @@ public class BookController {
         libro.setImagenUrl(s3Service.getObjectUrl(libro.getImagenPath()));
         return libro;
     }
+
+    @DeleteMapping(value = "/book",params = "id")
+    ResponseEntity<String> delete(@RequestParam int id){
+        try {
+            Optional<Book> book = bookRepository.findById(id);
+            if (book.isPresent()) {
+                bookRepository.delete(book.get());
+            }
+            return ResponseEntity.ok("Eliminado");
+        }catch (Exception e){
+            return (ResponseEntity<String>) ResponseEntity.badRequest().body("No se ha podido eliminar el libro");
+        }
+    }
+
 }
