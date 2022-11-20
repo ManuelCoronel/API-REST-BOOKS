@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class BookController {
 
     @Autowired
-    IBookService bookService;
+    BookServiceImpl bookService;
 
     @GetMapping
     ResponseEntity<List<Book>> obtenerLibros(){
@@ -42,9 +42,9 @@ public class BookController {
     ResponseEntity<String> delete(@RequestParam int id){
         try {
             bookService.eliminarLibro(id);
-            return ResponseEntity.ok("Eliminado");
+            return ResponseEntity.ok("msg : Eliminado");
         }catch (Exception e){
-            return (ResponseEntity<String>) ResponseEntity.badRequest().body("No se ha podido eliminar el libro");
+            return (ResponseEntity<String>) ResponseEntity.badRequest().body("msg : No se ha podido eliminar el libro");
         }
     }
 
