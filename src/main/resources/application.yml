@@ -5,8 +5,8 @@ cloud:
       stack:
         auto:
       credentials:
-        access-key: AKIA6RMJOLWHU2XS36QE
-        secret-key: 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
+        access-key:
+        secret-key:
 loggin:
   level:
     org:
